@@ -1,11 +1,689 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Привет, мир!</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Евгений Горитько, предприниматель из Краснодара</title>
+  <meta name="description" content="Евгений Горитько — предприниматель из Краснодара. Производство, психология, консалтинг." />
+  <meta name="theme-color" content="#0d1117" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Евгений Горитько, предприниматель из Краснодара" />
+  <meta property="og:description" content="Производство, психология, консалтинг. Персональный лендинг Евгения Горитько." />
+  <meta property="og:locale" content="ru_RU" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E◆%3C/text%3E%3C/svg%3E" />
+  <style>
+    :root {
+      --bg: #0a0d14;
+      --bg-soft: rgba(255, 255, 255, 0.04);
+      --panel: rgba(13, 17, 28, 0.78);
+      --panel-strong: rgba(16, 21, 34, 0.92);
+      --text: #f5f1e8;
+      --muted: #b7b0a3;
+      --line: rgba(255, 255, 255, 0.1);
+      --gold: #d6b36a;
+      --gold-soft: rgba(214, 179, 106, 0.18);
+      --blue: #6aa5d6;
+      --blue-soft: rgba(106, 165, 214, 0.14);
+      --shadow: 0 30px 80px rgba(0, 0, 0, 0.38);
+      --radius: 28px;
+      --radius-sm: 18px;
+      --container: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Georgia", "Times New Roman", serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 20%, rgba(214, 179, 106, 0.18), transparent 28%),
+        radial-gradient(circle at 88% 18%, rgba(106, 165, 214, 0.16), transparent 24%),
+        radial-gradient(circle at 50% 80%, rgba(255, 255, 255, 0.05), transparent 28%),
+        linear-gradient(135deg, #090c12 0%, #0d1117 45%, #101726 100%);
+      min-height: 100vh;
+      line-height: 1.55;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: radial-gradient(circle at center, black 45%, transparent 82%);
+      opacity: 0.3;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .wrap {
+      width: min(calc(100% - 32px), var(--container));
+      margin: 0 auto;
+    }
+
+    .site-shell {
+      position: relative;
+      padding: 20px 0 28px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 0 26px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .brand-mark {
+      width: 14px;
+      height: 14px;
+      transform: rotate(45deg);
+      border: 1px solid rgba(214, 179, 106, 0.7);
+      box-shadow: 0 0 24px rgba(214, 179, 106, 0.25);
+      background: linear-gradient(135deg, rgba(214,179,106,.6), rgba(106,165,214,.45));
+    }
+
+    .nav-link {
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.03);
+      backdrop-filter: blur(16px);
+      font-size: 14px;
+      transition: transform .25s ease, border-color .25s ease, background .25s ease;
+    }
+
+    .nav-link:hover,
+    .nav-link:focus-visible {
+      transform: translateY(-2px);
+      border-color: rgba(214, 179, 106, 0.55);
+      background: rgba(214, 179, 106, 0.08);
+      outline: none;
+    }
+
+    .hero {
+      position: relative;
+      display: grid;
+      gap: 26px;
+      padding: 28px 0 44px;
+    }
+
+    .hero-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: calc(var(--radius) + 8px);
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      backdrop-filter: blur(20px);
+      box-shadow: var(--shadow);
+      padding: 28px 22px 24px;
+      isolation: isolate;
+    }
+
+    .hero-card::before,
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(12px);
+      z-index: -1;
+    }
+
+    .hero-card::before {
+      width: 220px;
+      height: 220px;
+      background: rgba(214, 179, 106, 0.13);
+      top: -80px;
+      right: -20px;
+    }
+
+    .hero-card::after {
+      width: 180px;
+      height: 180px;
+      background: rgba(106, 165, 214, 0.12);
+      bottom: -60px;
+      left: -20px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--blue));
+      box-shadow: 0 0 0 6px rgba(214,179,106,0.12);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(52px, 12vw, 112px);
+      line-height: 0.92;
+      letter-spacing: -0.04em;
+      font-weight: 600;
+      max-width: 10ch;
+      text-wrap: balance;
+    }
+
+    .hero-subline {
+      margin: 16px 0 0;
+      font-size: clamp(18px, 4.5vw, 28px);
+      color: var(--muted);
+      letter-spacing: 0.02em;
+    }
+
+    .hero-copy {
+      margin: 24px 0 0;
+      max-width: 680px;
+      font-size: clamp(18px, 3.5vw, 22px);
+      color: #e7dfd2;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .btn,
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 0 22px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-size: 15px;
+      font-weight: 600;
+      transition: transform .25s ease, box-shadow .25s ease, background .25s ease, border-color .25s ease;
+    }
+
+    .btn {
+      color: #11151d;
+      background: linear-gradient(135deg, #f1d59b, #d6b36a 55%, #c79649);
+      box-shadow: 0 14px 30px rgba(214, 179, 106, 0.28);
+    }
+
+    .btn-secondary {
+      color: var(--text);
+      border-color: rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+    }
+
+    .btn:hover,
+    .btn:focus-visible,
+    .btn-secondary:hover,
+    .btn-secondary:focus-visible {
+      transform: translateY(-2px);
+      outline: none;
+    }
+
+    .hero-grid {
+      display: grid;
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .metric {
+      padding: 16px 18px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.09);
+    }
+
+    .metric-label {
+      margin: 0 0 6px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+    }
+
+    .metric-value {
+      margin: 0;
+      font-size: 20px;
+      color: var(--text);
+    }
+
+    section {
+      padding: 18px 0;
+    }
+
+    .section-card {
+      position: relative;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      backdrop-filter: blur(18px);
+      box-shadow: var(--shadow);
+      padding: 24px 20px;
+    }
+
+    .section-head {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 26px;
+    }
+
+    .section-kicker {
+      margin: 0;
+      color: var(--gold);
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(32px, 6vw, 56px);
+      line-height: 0.98;
+      letter-spacing: -0.03em;
+      max-width: 12ch;
+    }
+
+    .section-text {
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .about-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .about-note,
+    .about-story {
+      padding: 20px;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+    }
+
+    .about-note strong {
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    .cards {
+      display: grid;
+      gap: 16px;
+    }
+
+    .card {
+      position: relative;
+      overflow: hidden;
+      min-height: 100%;
+      border-radius: 24px;
+      padding: 22px;
+      border: 1px solid rgba(255,255,255,0.09);
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.025));
+      transition: transform .28s ease, border-color .28s ease, box-shadow .28s ease;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: auto -20% -45% auto;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(214,179,106,0.16), transparent 68%);
+      pointer-events: none;
+    }
+
+    .card:hover,
+    .card:focus-within {
+      transform: translateY(-6px);
+      border-color: rgba(214, 179, 106, 0.4);
+      box-shadow: 0 22px 48px rgba(0,0,0,0.26);
+    }
+
+    .card-tag {
+      display: inline-flex;
+      margin-bottom: 18px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(214, 179, 106, 0.1);
+      border: 1px solid rgba(214, 179, 106, 0.18);
+      color: #eed8a4;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .card h3 {
+      margin: 0 0 12px;
+      font-size: 28px;
+      letter-spacing: -0.03em;
+    }
+
+    .card p {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .details {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .details li {
+      position: relative;
+      padding-left: 18px;
+      color: #efe7da;
+      font-size: 15px;
+    }
+
+    .details li::before {
+      content: "";
+      position: absolute;
+      top: 10px;
+      left: 0;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--blue));
+      box-shadow: 0 0 0 5px rgba(106,165,214,.08);
+    }
+
+    .contacts {
+      display: grid;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .contact-panel {
+      padding: 20px;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,0.09);
+      background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.02));
+    }
+
+    .contact-label {
+      margin: 0 0 6px;
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    .contact-value {
+      font-size: clamp(20px, 4.5vw, 30px);
+      line-height: 1.15;
+      word-break: break-word;
+    }
+
+    .contact-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    footer {
+      padding: 10px 0 28px;
+      color: rgba(245, 241, 232, 0.72);
+      font-size: 14px;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .8s ease, transform .8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (min-width: 720px) {
+      .hero-card,
+      .section-card {
+        padding: 34px 34px 32px;
+      }
+
+      .hero-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .about-grid,
+      .contacts {
+        grid-template-columns: 1.25fr .9fr;
+      }
+    }
+
+    @media (min-width: 980px) {
+      .hero {
+        padding-top: 36px;
+      }
+
+      .cards {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .topbar {
+        padding-top: 18px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
 </head>
 <body>
-  <h1>Привет, мир!</h1>
+  <div class="site-shell">
+    <div class="wrap">
+      <header class="topbar reveal">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>Evgeny Goritko · egoritko.ru</span>
+        </div>
+        <a class="nav-link" href="#contacts">Связаться</a>
+      </header>
+
+      <main>
+        <section class="hero">
+          <div class="hero-card reveal">
+            <div class="eyebrow">Краснодар · предприниматель</div>
+            <h1>Евгений Горитько</h1>
+            <p class="hero-subline">Предприниматель · Краснодар</p>
+            <p class="hero-copy">
+              Строю практичные бизнесы на стыке производства, экспертизы и доверия: от запуска металлоцеха до психологического сопровождения и консалтинга для предпринимателей.
+            </p>
+            <div class="hero-actions">
+              <a class="btn" href="#contacts">Связаться</a>
+              <a class="btn-secondary" href="#directions">Смотреть направления</a>
+            </div>
+            <div class="hero-grid">
+              <div class="metric">
+                <p class="metric-label">Фокус</p>
+                <p class="metric-value">3 направления бизнеса</p>
+              </div>
+              <div class="metric">
+                <p class="metric-label">База</p>
+                <p class="metric-value">Строительное и экономическое образование</p>
+              </div>
+              <div class="metric">
+                <p class="metric-label">Подход</p>
+                <p class="metric-value">Системность, практичность, долгий горизонт</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="about">
+          <div class="section-card reveal">
+            <div class="section-head">
+              <p class="section-kicker">Обо мне</p>
+              <h2>От госслужбы к собственным направлениям роста</h2>
+              <p class="section-text">
+                У меня два высших образования, строительное и экономическое, поэтому я одинаково внимательно смотрю и на процессы, и на цифры. Ранее я работал в Министерстве сельского хозяйства по направлению мелиорации, а затем ушёл с госслужбы, чтобы строить собственные проекты. Сейчас моя задача, создавать устойчивые направления бизнеса, которые дают реальную пользу людям и опираются на сильную экспертизу. Краснодар для меня, точка запуска и развития долгих инициатив.
+              </p>
+            </div>
+            <div class="about-grid">
+              <div class="about-story">
+                Я собираю проекты не ради шума, а ради результата: понятная модель, рабочий процесс, сильная репутация и рост без хаоса. Каждый из трёх векторов дополняет другой, производство даёт фундамент, психология усиливает качество работы с людьми, а консалтинг помогает превращать опыт в практическую пользу для других предпринимателей.
+              </div>
+              <div class="about-note">
+                <strong>Сейчас в фокусе:</strong> запуск металлоцеха в Краснодаре, формирование продуктовой линейки и развитие сопутствующих экспертных направлений без распыления внимания.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="directions">
+          <div class="section-card reveal">
+            <div class="section-head">
+              <p class="section-kicker">Три направления</p>
+              <h2>Практичный портфель бизнеса и экспертизы</h2>
+              <p class="section-text">
+                Основное направление, производство. Дополняющие, психология и консалтинг. Вместе они формируют устойчивую экосистему вокруг реальных задач бизнеса и людей.
+              </p>
+            </div>
+            <div class="cards">
+              <article class="card">
+                <div class="card-tag">01 · Производство</div>
+                <h3>Металлообработка</h3>
+                <p>
+                  Ключевой проект, запуск металлоцеха в Краснодаре с фокусом на понятную стартовую линейку и дальнейшее расширение ассортимента изделий из металла.
+                </p>
+                <ul class="details">
+                  <li>Старт производства: декабрь 2026</li>
+                  <li>Стартовая продукция: резьбовая шпилька M8–M36</li>
+                  <li>Классы прочности: 8.8–12.9</li>
+                  <li>Дополнительно: ролики для откатных ворот</li>
+                  <li>План, расширение номенклатуры металлических изделий</li>
+                </ul>
+              </article>
+
+              <article class="card">
+                <div class="card-tag">02 · Психология</div>
+                <h3>Психологическое сопровождение</h3>
+                <p>
+                  Отдельное направление, основанное на глубокой практике и живой экспертности. Работа строится вокруг реальной поддержки, устойчивости и качества отношений.
+                </p>
+                <ul class="details">
+                  <li>Практикующий психолог с 30-летним стажем</li>
+                  <li>Экспертное ядро направления, супруга</li>
+                  <li>Индивидуальные консультации</li>
+                  <li>Семейная работа и сопровождение</li>
+                </ul>
+              </article>
+
+              <article class="card">
+                <div class="card-tag">03 · Консалтинг</div>
+                <h3>Юридический и бизнес-консалтинг</h3>
+                <p>
+                  Поддержка предпринимателей там, где нужны структура, навигация по рискам и практический взгляд на работу с государственными и коммерческими системами.
+                </p>
+                <ul class="details">
+                  <li>Сопровождение предпринимателей</li>
+                  <li>Юридический и бизнес-консалтинг</li>
+                  <li>Опыт взаимодействия с госструктурами</li>
+                  <li>Практика на стыке частного и государственного сектора</li>
+                </ul>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section id="contacts">
+          <div class="section-card reveal">
+            <div class="section-head">
+              <p class="section-kicker">Контакты</p>
+              <h2>Если есть задача, давай обсудим</h2>
+              <p class="section-text">
+                Для партнёрств, деловых предложений и рабочих контактов используй почту или Telegram. Телефон на сайте не публикуется.
+              </p>
+            </div>
+            <div class="contacts">
+              <div class="contact-panel">
+                <p class="contact-label">Email</p>
+                <div class="contact-value">e.goritko@gmail.com</div>
+              </div>
+              <div class="contact-panel">
+                <p class="contact-label">Telegram</p>
+                <div class="contact-value">@GEvgenyF</div>
+              </div>
+            </div>
+            <div class="contact-actions">
+              <a class="btn" href="mailto:e.goritko@gmail.com">Написать на почту</a>
+              <a class="btn-secondary" href="https://t.me/GEvgenyF" target="_blank" rel="noopener noreferrer">Telegram</a>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="wrap reveal">
+        © 2026 Евгений Горитько
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.18 });
+
+    document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
+  </script>
 </body>
 </html>
