@@ -497,6 +497,11 @@
     }
 
     @media (min-width: 980px) {
+      .cards-directions {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+
       .hero {
         padding-top: 36px;
       }
@@ -597,7 +602,7 @@
                 Основа — собственное производство. Дополнение — юридическая практика, опирающаяся на 20-летний опыт работы с государственными и промышленными системами.
               </p>
             </div>
-            <div class="cards" style="grid-template-columns: repeat(3, minmax(0, 1fr));">
+            <div class="cards cards-directions">
               <article class="card">
                 <div class="card-tag">01 · Производство</div>
                 <h3>Металлообработка</h3>
