@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>«K23» , производство резьбовых шпилек и роликов откатных ворот</title>
+  <meta name="description" content="«K23» , металлоцех в Краснодаре. Резьбовые шпильки M8-M36 и ролики откатных ворот. MVP-версия, запуск декабрь 2026." />
+  <style>
+    :root {
+      --bg: #090909;
+      --bg-soft: #121212;
+      --panel: rgba(255,255,255,0.04);
+      --panel-strong: rgba(255,255,255,0.07);
+      --line: rgba(255,255,255,0.12);
+      --text: #f2efe7;
+      --muted: #b8b2a5;
+      --steel: #a8acb3;
+      --accent: #ff7a00;
+      --accent-soft: rgba(255,122,0,0.18);
+      --accent-glow: rgba(255,122,0,0.35);
+      --ok: #d6c8a8;
+      --max: 1240px;
+      --radius: 28px;
+      --shadow: 0 30px 80px rgba(0,0,0,0.38);
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "Trebuchet MS", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 18% 18%, rgba(255,122,0,0.13), transparent 24%),
+        radial-gradient(circle at 84% 14%, rgba(255,255,255,0.09), transparent 22%),
+        linear-gradient(135deg, #070707 0%, #0f0f10 46%, #090909 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px),
+        radial-gradient(circle at center, transparent 0 62%, rgba(255,255,255,0.015) 63%, transparent 64%);
+      background-size: 44px 44px, 44px 44px, 100% 100%;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,0.35));
+      z-index: 0;
+    }
+
+    .shell {
+      position: relative;
+      z-index: 1;
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      padding: 22px 0 0;
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 14px 18px;
+      background: rgba(10,10,10,0.56);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.24);
+    }
+
+    .brand-mini {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .brand-mark {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background:
+        linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)),
+        linear-gradient(135deg, rgba(255,122,0,0.22), rgba(255,122,0,0.02));
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--accent);
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      box-shadow: inset 0 0 18px rgba(255,122,0,0.08);
+    }
+
+    .brand-mini strong {
+      display: block;
+      font-size: 0.96rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .brand-mini span {
+      color: var(--muted);
+      font-size: 0.84rem;
+    }
+
+    .status-pill {
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,122,0,0.25);
+      background: rgba(255,122,0,0.09);
+      color: #ffd8b5;
+      font-size: 0.84rem;
+      white-space: nowrap;
+    }
+
+    .hero {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+      gap: 28px;
+      padding: 34px 0 18px;
+      align-items: stretch;
+    }
+
+    .hero-card,
+    .thread-card,
+    .section-card,
+    .footer-card {
+      position: relative;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero-card::before,
+    .thread-card::before,
+    .section-card::before,
+    .footer-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(145deg, rgba(255,255,255,0.05), transparent 36%, transparent 68%, rgba(255,122,0,0.08));
+      pointer-events: none;
+    }
+
+    .hero-card {
+      padding: 38px 34px 32px;
+      min-height: 640px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.045);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--ok);
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      width: fit-content;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 18px var(--accent-glow);
+    }
+
+    .hero-copy {
+      margin-top: 22px;
+      position: relative;
+      padding-right: 12px;
+    }
+
+    .thread-quotes {
+      position: absolute;
+      inset: -36px -14px auto auto;
+      pointer-events: none;
+      line-height: 0.8;
+      display: flex;
+      align-items: flex-start;
+      gap: 2px;
+      color: rgba(255,122,0,0.78);
+      text-shadow: 0 0 30px rgba(255,122,0,0.28);
+      font-weight: 700;
+    }
+
+    .thread-quotes span {
+      display: inline-block;
+      font-size: clamp(5rem, 15vw, 10rem);
+      transform: skewX(-12deg);
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(3.1rem, 9vw, 7.8rem);
+      line-height: 0.9;
+      letter-spacing: -0.05em;
+      text-transform: uppercase;
+      max-width: 7ch;
+    }
+
+    .hero h1 .kicker {
+      display: block;
+      color: var(--muted);
+      font-size: clamp(0.96rem, 1.7vw, 1.18rem);
+      letter-spacing: 0.24em;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 .brandline {
+      display: block;
+      font-weight: 900;
+      position: relative;
+      padding-left: 0.1em;
+    }
+
+    .hero h1 .brandline em {
+      font-style: normal;
+      color: var(--text);
+    }
+
+    .hero h1 .brandline .quote-left,
+    .hero h1 .brandline .quote-right {
+      color: var(--accent);
+      display: inline-block;
+      transform: translateY(-0.03em) scale(1.08);
+    }
+
+    .hero p.lead {
+      margin: 24px 0 0;
+      max-width: 61ch;
+      font-size: 1.06rem;
+      line-height: 1.7;
+      color: #dfd8ca;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .metric {
+      padding: 16px 16px 14px;
+      background: rgba(255,255,255,0.035);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      min-height: 124px;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 1.36rem;
+      margin-bottom: 8px;
+      color: #fff3e5;
+    }
+
+    .metric span {
+      display: block;
+      color: var(--muted);
+      line-height: 1.5;
+      font-size: 0.92rem;
+    }
+
+    .hero-actions {
+      margin-top: 28px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .button,
+    .ghost {
+      text-decoration: none;
+      color: inherit;
+      padding: 14px 18px;
+      border-radius: 999px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      transition: transform .24s ease, box-shadow .24s ease, border-color .24s ease, background .24s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .button {
+      background: linear-gradient(135deg, var(--accent), #ff9d42);
+      color: #18110c;
+      box-shadow: 0 18px 40px rgba(255,122,0,0.24);
+    }
+
+    .ghost {
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+    }
+
+    .button:hover,
+    .ghost:hover {
+      transform: translateY(-2px);
+    }
+
+    .thread-card {
+      padding: 30px;
+      display: grid;
+      grid-template-rows: auto auto 1fr auto;
+      gap: 18px;
+      min-height: 640px;
+      background:
+        radial-gradient(circle at 72% 12%, rgba(255,122,0,0.12), transparent 22%),
+        linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.02));
+    }
+
+    .panel-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+    }
+
+    .thread-visual {
+      position: relative;
+      min-height: 260px;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background:
+        linear-gradient(160deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)),
+        linear-gradient(180deg, #171717, #0b0b0b);
+      overflow: hidden;
+    }
+
+    .thread-visual::before {
+      content: "";
+      position: absolute;
+      inset: 10% 16% 10% 16%;
+      border-radius: 999px;
+      background:
+        repeating-linear-gradient(
+          -62deg,
+          #8e9399 0 16px,
+          #dadee3 16px 28px,
+          #5f646c 28px 44px
+        );
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.26),
+        0 30px 60px rgba(0,0,0,0.45),
+        0 0 40px rgba(255,255,255,0.08);
+      transform: rotate(-18deg) scale(1.04);
+    }
+
+    .thread-visual::after {
+      content: "«K23»";
+      position: absolute;
+      right: 18px;
+      bottom: 12px;
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.6);
+    }
+
+    .spec-stack {
+      display: grid;
+      gap: 12px;
+    }
+
+    .spec-item {
+      display: grid;
+      grid-template-columns: 132px 1fr;
+      gap: 12px;
+      align-items: start;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .spec-item:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .spec-item dt {
+      color: var(--muted);
+      font-size: 0.88rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .spec-item dd {
+      margin: 0;
+      color: #ebe5d8;
+      line-height: 1.55;
+      font-size: 0.96rem;
+    }
+
+    .sections {
+      padding: 24px 0 52px;
+      display: grid;
+      gap: 22px;
+    }
+
+    .section-card {
+      padding: 30px;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(260px, 0.7fr);
+      gap: 20px;
+      align-items: end;
+      margin-bottom: 24px;
+    }
+
+    .section-head h2 {
+      margin: 10px 0 0;
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: 0.96;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 0.98rem;
+    }
+
+    .products-grid,
+    .reasons-grid,
+    .launch-grid,
+    .contact-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .products-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .product {
+      position: relative;
+      padding: 22px;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.02)),
+        linear-gradient(135deg, rgba(255,122,0,0.06), transparent 42%);
+      overflow: hidden;
+    }
+
+    .product::after {
+      content: "";
+      position: absolute;
+      inset: auto -10% -40% auto;
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,122,0,0.12), transparent 70%);
+      pointer-events: none;
+    }
+
+    .product strong {
+      display: block;
+      font-size: 1.34rem;
+      margin-bottom: 14px;
+    }
+
+    .product p {
+      margin: 0 0 18px;
+      color: #e4ddcf;
+      line-height: 1.68;
+    }
+
+    .bullet-list {
+      display: grid;
+      gap: 10px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .bullet-list li {
+      position: relative;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.52;
+    }
+
+    .bullet-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.7em;
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 12px rgba(255,122,0,0.3);
+    }
+
+    .reasons-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .reason {
+      padding: 22px;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .reason .num {
+      display: inline-flex;
+      width: 38px;
+      height: 38px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      background: rgba(255,122,0,0.12);
+      color: #ffd6b4;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .reason strong {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 1.12rem;
+    }
+
+    .reason p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .launch-grid {
+      grid-template-columns: minmax(0, 1fr) 280px;
+      align-items: stretch;
+    }
+
+    .launch-main,
+    .launch-side {
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 24px;
+      background: rgba(255,255,255,0.03);
+    }
+
+    .launch-date {
+      display: inline-block;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(255,122,0,0.12);
+      border: 1px solid rgba(255,122,0,0.2);
+      color: #ffd8bc;
+      font-size: 0.88rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .launch-main h3,
+    .launch-side h3 {
+      margin: 0 0 14px;
+      font-size: 1.54rem;
+    }
+
+    .launch-main p,
+    .launch-side p,
+    .launch-side li {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .launch-side ul {
+      margin: 0;
+      padding-left: 18px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .contact-grid {
+      grid-template-columns: minmax(0, 1fr) 320px;
+      align-items: stretch;
+    }
+
+    .contact-main,
+    .contact-side {
+      padding: 24px;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .contact-main p,
+    .contact-side p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.68;
+    }
+
+    .contact-actions {
+      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .contact-link {
+      min-width: 220px;
+      padding: 16px 18px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.035);
+      text-decoration: none;
+      color: var(--text);
+      transition: transform .24s ease, border-color .24s ease;
+    }
+
+    .contact-link:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255,122,0,0.35);
+    }
+
+    .contact-link small {
+      display: block;
+      color: var(--muted);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.74rem;
+    }
+
+    .contact-link strong {
+      font-size: 1.02rem;
+    }
+
+    .contact-side strong {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+    }
+
+    .contact-side .placeholder {
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      border: 1px dashed rgba(255,255,255,0.16);
+      color: #ddd4c4;
+      background: rgba(255,255,255,0.02);
+    }
+
+    .footer {
+      padding: 0 0 42px;
+    }
+
+    .footer-card {
+      padding: 22px 24px;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .footer-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 68ch;
+    }
+
+    .footer-brand {
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: #fff2e0;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 1080px) {
+      .hero,
+      .section-head,
+      .launch-grid,
+      .contact-grid,
+      .reasons-grid,
+      .products-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .thread-card,
+      .hero-card {
+        min-height: unset;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .shell {
+        width: min(var(--max), calc(100% - 20px));
+      }
+
+      .topbar-inner,
+      .hero-card,
+      .thread-card,
+      .section-card,
+      .footer-card {
+        border-radius: 22px;
+      }
+
+      .topbar-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .hero-card,
+      .thread-card,
+      .section-card {
+        padding: 22px;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .spec-item {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
+
+      .thread-quotes {
+        inset: -18px -6px auto auto;
+      }
+
+      .button,
+      .ghost,
+      .contact-link {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="brand-mini">
+          <div class="brand-mark">23</div>
+          <div>
+            <strong>«K23»</strong>
+            <span>Металлоцех, Краснодар, Кубань</span>
+          </div>
+        </div>
+        <div class="status-pill">MVP-версия, запуск декабрь 2026</div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" id="top">
+        <article class="hero-card">
+          <div>
+            <div class="eyebrow">Локальное производство для B2B-закупки</div>
+            <div class="hero-copy">
+              <div class="thread-quotes" aria-hidden="true"><span>«</span><span>»</span></div>
+              <h1>
+                <span class="kicker">Краснодар, регион 23</span>
+                <span class="brandline"><span class="quote-left">«</span><em>K23</em><span class="quote-right">»</span></span>
+              </h1>
+              <p class="lead">
+                Новый металлоцех для тех, кому важны не разговоры про "когда-нибудь", а понятный контакт с производством в регионе. На старте , резьбовые шпильки M8-M36 классов 8.8-12.9 и ролики откатных ворот. Страница создана, чтобы заранее собрать интерес к запуску и показать: проект реальный, с промышленной логикой и фокусом на качестве.
+              </p>
+            </div>
+
+            <div class="hero-grid">
+              <div class="metric">
+                <strong>Стартовая линейка</strong>
+                <span>Резьбовые шпильки M8-M36 и ролики откатных ворот для строительных, монтажных и производственных задач.</span>
+              </div>
+              <div class="metric">
+                <strong>Формат работы</strong>
+                <span>Ориентация на опт, повторяемость поставок и внятную коммуникацию по срокам и параметрам.</span>
+              </div>
+              <div class="metric">
+                <strong>Запуск</strong>
+                <span>Декабрь 2026. Сейчас идёт ранний этап, можно оставить интерес и войти в первый пул контактов.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-actions">
+            <a class="button" href="#contact">Оставить интерес</a>
+            <a class="ghost" href="#products">Смотреть номенклатуру</a>
+          </div>
+        </article>
+
+        <aside class="thread-card">
+          <div class="panel-label">Визуальный код бренда</div>
+          <div class="thread-visual" aria-hidden="true"></div>
+          <div class="spec-stack">
+            <dl class="spec-item">
+              <dt>Что означает «K23»</dt>
+              <dd>Буква K , Краснодар, число 23 , код региона Кубани. Название короткое, жёсткое, легко запоминается в B2B-среде.</dd>
+            </dl>
+            <dl class="spec-item">
+              <dt>Почему кавычки</dt>
+              <dd>« ... » визуально напоминают профиль резьбы. Это не декоративная случайность, а часть фирменного почерка проекта.</dd>
+            </dl>
+            <dl class="spec-item">
+              <dt>Сейчас на странице</dt>
+              <dd>MVP-версия, запуск декабрь 2026. Конкретные параметры, которые ещё уточняются, помечены честно: [уточнить перед запуском].</dd>
+            </dl>
+          </div>
+        </aside>
+      </section>
+
+      <div class="sections">
+        <section class="section-card" id="products">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">Что производим на старте</div>
+              <h2>Стартовая номенклатура без лишнего шума</h2>
+            </div>
+            <p>
+              «K23» выходит на рынок с двумя понятными направлениями. Без выдуманных цифр, без обещаний о всём сразу. Только то, что действительно заявлено к запуску.
+            </p>
+          </div>
+
+          <div class="products-grid">
+            <article class="product">
+              <strong>Резьбовые шпильки</strong>
+              <p>
+                Базовая линейка , шпильки M8-M36 классов прочности 8.8-12.9 для строительных и монтажных задач, где важны повторяемость, геометрия и понятная работа с партией.
+              </p>
+              <ul class="bullet-list">
+                <li>Диапазон: M8-M36</li>
+                <li>Классы прочности: 8.8-12.9</li>
+                <li>Материалы и покрытия: [уточнить перед запуском]</li>
+                <li>Длины, упаковка, минимальная партия: [уточнить перед запуском]</li>
+              </ul>
+            </article>
+
+            <article class="product">
+              <strong>Ролики откатных ворот</strong>
+              <p>
+                Продукция для предприятий, которые работают с заборами, воротами и монтажом. Фокус , стабильный серийный продукт под реальный спрос в регионе.
+              </p>
+              <ul class="bullet-list">
+                <li>Направление: комплектующие для откатных ворот</li>
+                <li>Типоразмеры и нагрузочные параметры: [уточнить перед запуском]</li>
+                <li>Материалы, исполнение, совместимость: [уточнить перед запуском]</li>
+                <li>Оптовой аудитории удобно обсуждать потребность заранее</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="section-card" id="why">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">Почему именно «K23»</div>
+              <h2>Локальное производство с нормальной промышленной логикой</h2>
+            </div>
+            <p>
+              Для закупщика важны не красивые слова, а предсказуемость. «K23» строится как региональный металлоцех с понятным фокусом, без распыления и без театра вокруг станков.
+            </p>
+          </div>
+
+          <div class="reasons-grid">
+            <article class="reason">
+              <div class="num">01</div>
+              <strong>Краснодар, ближе к объектам и монтажу</strong>
+              <p>Проект локализован на Кубани. Это важно для строительных компаний, монтажных бригад и производств Юга, которым удобнее иметь поставщика в регионе.</p>
+            </article>
+            <article class="reason">
+              <div class="num">02</div>
+              <strong>Узкий стартовый фокус</strong>
+              <p>На первом этапе только две продуктовые группы. Такой подход снижает хаос, помогает держать внимание на качестве и не превращает запуск в каталог фантазий.</p>
+            </article>
+            <article class="reason">
+              <div class="num">03</div>
+              <strong>Контроль качества как рабочая дисциплина</strong>
+              <p>На странице не обещаются сертификаты и объёмы, которых пока нет в подтверждённых данных. Это уже хороший сигнал для тех, кто устал от маркетинга без фактуры.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section-card" id="launch">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">Скоро открытие</div>
+              <h2>Производство готовится к запуску в декабре 2026</h2>
+            </div>
+            <p>
+              Сейчас это ранняя точка входа. Если тебе интересны шпильки M8-M36 или ролики откатных ворот для регулярной закупки, лучше зайти в контакт заранее, чем искать в аврале перед объектом.
+            </p>
+          </div>
+
+          <div class="launch-grid">
+            <div class="launch-main">
+              <div class="launch-date">MVP-версия, запуск декабрь 2026</div>
+              <h3>Сайт уже работает как маркер серьёзности проекта</h3>
+              <p>
+                Эта страница не пытается заменить полноценный каталог. Её задача , показать, что «K23» уже формирует позиционирование, продуктовый фокус и контур будущих поставок. После уточнения параметров здесь появятся финальные спецификации, контактное лицо, условия работы и расширенная номенклатура.
+              </p>
+            </div>
+            <div class="launch-side">
+              <h3>Что появится дальше</h3>
+              <ul>
+                <li>Подтверждённые размеры, исполнения и условия поставки</li>
+                <li>Понятные сценарии для оптовиков и монтажных компаний</li>
+                <li>Технические детали без догадок и маркетинговой пены</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="section-card" id="contact">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">Контакты</div>
+              <h2>Оставь интерес к запуску «K23»</h2>
+            </div>
+            <p>
+              Контакты пока стоят как заглушка, чтобы ты мог быстро заменить их на финальные. Блок уже собран в рабочей структуре под B2B-лендинг.
+            </p>
+          </div>
+
+          <div class="contact-grid">
+            <div class="contact-main">
+              <p>
+                Если тебе интересны оптовые закупки, строительные поставки, монтажные потребности или направление комплектующих для ворот , можно будет связаться по телефону или почте и заранее обсудить стартовые объёмы.
+              </p>
+              <div class="contact-actions">
+                <a class="contact-link" href="mailto:contact@k23.ru">
+                  <small>Email</small>
+                  <strong>contact@k23.ru</strong>
+                </a>
+                <a class="contact-link" href="tel:+70000000000">
+                  <small>Телефон</small>
+                  <strong>+7 (000) 000-00-00</strong>
+                </a>
+              </div>
+            </div>
+            <aside class="contact-side">
+              <strong>Для замены перед публикацией</strong>
+              <p>Укажи здесь реальный телефон, почту, Telegram или форму сбора интереса. При необходимости этот блок легко расширяется до полноценной заявки.</p>
+              <div class="placeholder">[уточнить перед запуском: контактное лицо, адрес, режим работы, канал для оптовых заявок]</div>
+            </aside>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-card">
+        <p>
+          «K23» , металлоцех в Краснодаре. Резьбовые шпильки M8-M36 и ролики откатных ворот. MVP-версия, запуск декабрь 2026.
+        </p>
+        <div class="footer-brand">«K23»</div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
